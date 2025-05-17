@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, ArrowUp, ArrowDown, Eye } from 'lucide-react';
 
-const GeneratedArticles = () => {
+const GeneratedArticle = () => {
   const [activeTab, setActiveTab] = useState('generated');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredArticles, setFilteredArticles] = useState([]);
@@ -225,4 +225,4 @@ const GeneratedArticles = () => {
   );
 };
 
-export default GeneratedArticles;
+export default GeneratedArticle;
