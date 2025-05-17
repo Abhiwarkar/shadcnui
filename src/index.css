@@ -1,0 +1,202 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme base by default */
+    --background: 225 25% 7%;
+    --foreground: 210 40% 98%;
+    
+    --card: 228 22% 12%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 228 22% 12%;
+    --popover-foreground: 210 40% 98%;
+    
+    /* Vibrant primary - electric blue-purple */
+    --primary: 255 92% 76%;
+    --primary-hover: 255 92% 80%;
+    --primary-foreground: 225 25% 7%;
+    
+    /* Secondary color - subtle gray */
+    --secondary: 228 22% 20%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 228 22% 17%;
+    --muted-foreground: 215 20.2% 75.1%;
+    
+    /* Accent color - vibrant pink/magenta */
+    --accent: 330 95% 70%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 358 85% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 228 22% 17%;
+    --input: 228 22% 15%;
+    --ring: 255 92% 76%;
+    
+    /* Vibrant chart colors */
+    --chart-1: 255 92% 76%;
+    --chart-2: 330 95% 70%;
+    --chart-3: 190 95% 65%;
+    --chart-4: 150 86% 65%;
+    --chart-5: 35 95% 65%;
+    
+    --radius: 0.5rem;
+    
+    /* Sidebar styling */
+    --sidebar-width: 14rem;
+    --sidebar-background: 228 30% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-muted: 215 20.2% 65.1%;
+    --sidebar-primary: 255 92% 76%;
+    --sidebar-border: 228 22% 18%;
+    --sidebar-active-bg: 255 92% 76%;
+    --sidebar-active-fg: 225 25% 7%;
+    --sidebar-item-hover: 228 22% 16%;
+    --sidebar-icon: 255 92% 76%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-[hsl(var(--foreground))] font-bold;
+  }
+}
+
+/* Custom components */
+@layer components {
+  /* Sidebar styling */
+  .sidebar {
+    @apply fixed h-full w-[var(--sidebar-width)] bg-[hsl(var(--sidebar-background))] border-r border-[hsl(var(--sidebar-border))] z-30 flex flex-col transition-all;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center px-3 py-2 text-[hsl(var(--sidebar-foreground))] text-sm rounded-md my-0.5 transition-all;
+  }
+  
+  .sidebar-item:hover {
+    @apply bg-[hsl(var(--sidebar-item-hover))];
+  }
+  
+  .sidebar-item.active {
+    @apply bg-[hsl(var(--sidebar-active-bg))] text-[hsl(var(--sidebar-active-fg))] font-medium;
+  }
+  
+  .sidebar-item .icon {
+    @apply text-[hsl(var(--sidebar-icon))] mr-3;
+  }
+  
+  .sidebar-item.active .icon {
+    @apply text-[hsl(var(--sidebar-active-fg))];
+  }
+
+  /* Glowing elements */
+  .glow {
+    @apply relative;
+  }
+  
+  .glow::before {
+    @apply content-[''] absolute -inset-0.5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg blur opacity-50 transition-opacity;
+  }
+  
+  .glow:hover::before {
+    @apply opacity-75;
+  }
+  
+  /* Glassmorphism */
+  .glass {
+    @apply bg-[hsl(var(--card))]/80 backdrop-blur-md border border-[hsl(var(--border))]/30;
+  }
+  
+  /* Stats cards */
+  .stat-card {
+    @apply relative overflow-hidden rounded-xl bg-[hsl(var(--card))] p-6 shadow-lg;
+  }
+  
+  .stat-card-highlight {
+    @apply relative overflow-hidden rounded-xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--card))] to-[hsl(var(--card))]/70 p-6 shadow-lg;
+  }
+  
+  .stat-card-highlight::before {
+    @apply content-[''] absolute -inset-0.5 bg-gradient-to-r from-[hsl(var(--primary))]/20 to-[hsl(var(--accent))]/20 rounded-xl blur-sm -z-10;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-transparent bg-clip-text;
+  }
+  
+  /* Gradient borders */
+  .gradient-border {
+    @apply relative border-0;
+  }
+  
+  .gradient-border::before {
+    @apply content-[''] absolute inset-0 rounded-[inherit] p-[1px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] -z-10 pointer-events-none;
+  }
+  
+  /* Main content that adjusts with sidebar */
+  .main-content {
+    @apply ml-[var(--sidebar-width)] transition-all duration-300;
+  }
+  
+  /* Button styling */
+  .btn-primary {
+    @apply px-4 py-2 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] rounded-md transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--secondary))]/80 text-[hsl(var(--secondary-foreground))] rounded-md transition-colors;
+  }
+  
+  .btn-outline {
+    @apply px-4 py-2 bg-transparent border border-[hsl(var(--border))] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--primary))]/10 hover:border-[hsl(var(--primary))] rounded-md transition-colors;
+  }
+  
+  /* Table styling */
+  .table-container {
+    @apply rounded-xl overflow-hidden bg-[hsl(var(--card))] border border-[hsl(var(--border))];
+  }
+  
+  .table-row {
+    @apply border-b border-[hsl(var(--border))] hover:bg-[hsl(var(--secondary))]/50 transition-colors;
+  }
+  
+  .table-header {
+    @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] font-medium text-sm py-3 px-4;
+  }
+  
+  .table-cell {
+    @apply py-4 px-4 text-[hsl(var(--foreground))];
+  }
+  
+  /* Tab styling */
+  .tab {
+    @apply px-4 py-2 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] border-b-2 border-transparent transition-colors;
+  }
+  
+  .tab.active {
+    @apply text-[hsl(var(--primary))] border-[hsl(var(--primary))];
+  }
+  
+  /* Form elements */
+  .input {
+    @apply bg-[hsl(var(--input))] border border-[hsl(var(--border))] rounded-md px-3 py-2 text-[hsl(var(--foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))] focus:outline-none;
+  }
+  
+  .checkbox {
+    @apply h-4 w-4 rounded border-[hsl(var(--border))] text-[hsl(var(--primary))] focus:ring-[hsl(var(--ring))];
+  }
+}
