@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
@@ -6,7 +5,16 @@ import {
   Plus,
   ChevronRight,
   Settings,
-  User
+  User,
+  Book,
+  Link2,
+  ExternalLink,
+  Puzzle,
+  CreditCard,
+  DollarSign,
+  HelpCircle,
+  Bell,
+  MessageCircle
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -93,12 +101,59 @@ const Sidebar = () => {
       {/* Navigation items */}
       <div className="flex-1 overflow-y-auto px-2">
         <nav className="space-y-1">
+          {/* Generated Articles - Single link instead of dropdown */}
           <Link
             to="/"
             className={`sidebar-item ${isActive('/') && !location.pathname.includes('/articles/create') ? 'active' : ''}`}
           >
             <FileText className="h-5 w-5 icon" />
             <span>Generated Articles</span>
+          </Link>
+          
+          {/* Other menu items */}
+          <Link to="/auto-blog" className="sidebar-item">
+            <Book className="h-5 w-5 icon" />
+            <span>Auto Blog</span>
+          </Link>
+          
+          <Link to="/internal-links" className="sidebar-item">
+            <Link2 className="h-5 w-5 icon" />
+            <span>Internal Links</span>
+          </Link>
+          
+          <Link to="/free-backlinks" className="sidebar-item">
+            <ExternalLink className="h-5 w-5 icon" />
+            <span>Free Backlinks</span>
+          </Link>
+          
+          <Link to="/integrations" className="sidebar-item">
+            <Puzzle className="h-5 w-5 icon" />
+            <span>Integrations</span>
+          </Link>
+          
+          <Link to="/subscription" className="sidebar-item">
+            <CreditCard className="h-5 w-5 icon" />
+            <span>Subscription</span>
+          </Link>
+          
+          <Link to="/affiliate-program" className="sidebar-item">
+            <DollarSign className="h-5 w-5 icon" />
+            <span>Affiliate Program</span>
+          </Link>
+          
+          <Link to="/help-center" className="sidebar-item">
+            <HelpCircle className="h-5 w-5 icon" />
+            <span>Help Center</span>
+          </Link>
+          
+          <Link to="/updates" className="sidebar-item">
+            <Bell className="h-5 w-5 icon" />
+            <span>Updates</span>
+          </Link>
+          
+          <Link to="/live-chat-support" className="sidebar-item">
+            <MessageCircle className="h-5 w-5 icon" />
+            <span>Live Chat Support</span>
           </Link>
           
           <Link
